@@ -11,7 +11,7 @@ resource "pritunl_organization" "organization" {
 
 resource "pritunl_server" "test" {
   for_each = var.pritunl.servers
-  name = each.key
+  name     = each.key
 
   organization_ids = [
     pritunl_organization.organization.id
@@ -29,9 +29,9 @@ resource "pritunl_server" "test" {
 }
 
 resource "pritunl_user" "test" {
-  for_each = { for k, v in var.users: k => v if v.pritunl != null  }
+  for_each        = { for k, v in var.users : k => v if v.pritunl != null }
   name            = each.key
   organization_id = pritunl_organization.organization.id
   email           = each.value.email
-  groups = each.value.pritunl.groups
+  groups          = each.value.pritunl.groups
 }

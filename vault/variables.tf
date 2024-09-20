@@ -1,12 +1,12 @@
 variable "project" {
   type = object({
-    env        = string
+    env     = string
     company = string
   })
 }
 variable "vault_auth" {
   type = object({
-    url = string
+    url   = string
     token = string
   })
 }
@@ -15,22 +15,22 @@ variable "vault" {
     auth_method = optional(object({
       oidc = optional(object({
         oidc_discovery_url = optional(string)
-        oidc_client_id = optional(string)
+        oidc_client_id     = optional(string)
         default_role = optional(object({
-          name = optional(string)
+          name     = optional(string)
           policies = optional(list(string))
         }))
         oidc_client_secret = optional(string)
-        bound_issuer = optional(string)
+        bound_issuer       = optional(string)
       }), {})
     }), {})
     repositories = optional(map(object({
-      type = optional(string, "kv-v2")
+      type        = optional(string, "kv-v2")
       description = optional(string)
-      options = optional(map(string))
+      options     = optional(map(string))
     })), {})
     policies = optional(map(list(object({
-      path = optional(string)
+      path         = optional(string)
       capabilities = optional(list(string))
     }))), {})
   })
